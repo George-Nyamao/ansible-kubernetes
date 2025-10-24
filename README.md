@@ -4,6 +4,13 @@ Complete Kubernetes cluster automation using Ansible - from installation to prod
 
 ## Features
 
+## 🔗 Connect With Me
+
+[![GitHub](https://img.shields.io/badge/GitHub-George--Nyamao-181717?style=for-the-badge&logo=github)](https://github.com/George-Nyamao)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-George_Nyamao-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/george-nyamao-842137218/)
+[![Email](https://img.shields.io/badge/Email-gmnyamao@hotmail.com-D14836?style=for-the-badge&logo=gmail)](mailto:gmnyamao@hotmail.com)
+
+
 - ✅ Automated Kubernetes cluster initialization
 - ✅ Master and worker node configuration
 - ✅ Container runtime (containerd) setup
@@ -406,6 +413,9 @@ MIT License
 
 ## Support
 [![GitHub Issues](https://img.shields.io/github/issues/George-Nyamao/ansible-kubernetes)](https://github.com/George-Nyamao/ansible-kubernetes/issues)
+[![GitHub Discussions](https://img.shields.io/badge/GitHub-Discussions-181717?style=flat&logo=github)](https://github.com/George-Nyamao/ansible-kubernetes/discussions)
+
+[![GitHub Issues](https://img.shields.io/github/issues/George-Nyamao/ansible-kubernetes)](https://github.com/George-Nyamao/ansible-kubernetes/issues)
 
 - **Issues**: [GitHub Issues](https://github.com/George-Nyamao/ansible-kubernetes/issues)
 - **Kubernetes Docs**: [kubernetes.io](https://kubernetes.io/docs/)
@@ -418,12 +428,25 @@ MIT License
 - Add-ons installation
 - ETCD backup automation
 
+## Acknowledgments
+
+- Kubernetes community
+- Ansible community
+- Contributors
+
 ## Author
 
 **George Nyamao**
 - GitHub: [@George-Nyamao](https://github.com/George-Nyamao)
 - LinkedIn: [George Nyamao](https://www.linkedin.com/in/george-nyamao-842137218/)
+- Email: gmnyamao@hotmail.com
 
 ---
+
+## Related Projects
+
+- [Ansible LAMP Stack](https://github.com/George-Nyamao/ansible-lamp-stack)
+- [Ansible Docker Automation](https://github.com/George-Nyamao/ansible-docker-automation)
+- [Ansible Jenkins CI/CD](https://github.com/George-Nyamao/ansible-jenkins-cicd)
 
 ⭐ **Star this repository if you find it helpful!**
