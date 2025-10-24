@@ -420,7 +420,7 @@ MIT License
 
 ## Author
 
-**Your Name**
+**George Nyamao**
 - GitHub: [@George-Nyamao](https://github.com/George-Nyamao)
 - LinkedIn: [George Nyamao](https://www.linkedin.com/in/george-nyamao-842137218/)
 
