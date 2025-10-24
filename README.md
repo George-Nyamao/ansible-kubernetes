@@ -16,6 +16,12 @@ Complete Kubernetes cluster automation using Ansible - from installation to prod
 
 ## Project Structure
 
+
+## 🔗 Connect With Me
+
+[![GitHub](https://img.shields.io/badge/GitHub-George--Nyamao-181717?style=for-the-badge&logo=github)](https://github.com/George-Nyamao)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-George_Nyamao-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/george-nyamao-842137218/)
+[![Email](https://img.shields.io/badge/Email-gmnyamao@hotmail.com-D14836?style=for-the-badge&logo=gmail)](mailto:gmnyamao@hotmail.com)
 ```
 .
 ├── ansible.cfg
@@ -40,7 +46,7 @@ Complete Kubernetes cluster automation using Ansible - from installation to prod
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/ansible-kubernetes.git
+git clone https://github.com/George-Nyamao/ansible-kubernetes.git
 cd ansible-kubernetes
 ```
 
@@ -399,13 +405,14 @@ Contributions welcome! Please:
 MIT License
 
 ## Support
+[![GitHub Issues](https://img.shields.io/github/issues/George-Nyamao/ansible-kubernetes)](https://github.com/George-Nyamao/ansible-kubernetes/issues)
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/ansible-kubernetes/issues)
+- **Issues**: [GitHub Issues](https://github.com/George-Nyamao/ansible-kubernetes/issues)
 - **Kubernetes Docs**: [kubernetes.io](https://kubernetes.io/docs/)
 
 ## Changelog
 
-### v1.0.0 (2024-01-XX)
+### v1.0.0 (2025-10-23)
 - Initial release
 - Multi-node cluster setup
 - Add-ons installation
@@ -414,8 +421,8 @@ MIT License
 ## Author
 
 **Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your Profile](https://linkedin.com/in/yourprofile)
+- GitHub: [@George-Nyamao](https://github.com/George-Nyamao)
+- LinkedIn: [George Nyamao](https://www.linkedin.com/in/george-nyamao-842137218/)
 
 ---
 
