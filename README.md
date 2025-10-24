@@ -410,10 +410,12 @@ Contributions welcome! Please:
 MIT License
 
 ## Support
-- **Issues**: [GitHub Issues](https://github.com/George-Nyamao/ansible-kubernetes/issues)
-- **Kubernetes Docs**: [kubernetes.io](https://kubernetes.io/docs/)
+[![GitHub Issues](https://img.shields.io/github/issues/George-Nyamao/ansible-kubernetes)](https://github.com/George-Nyamao/ansible-kubernetes/issues)
+[![GitHub Discussions](https://img.shields.io/badge/GitHub-Discussions-181717?style=flat&logo=github)](https://github.com/George-Nyamao/ansible-kubernetes/discussions)
 
-## Changelog
+- **Issues**: [GitHub Issues](https://github.com/George-Nyamao/ansible-kubernetes/issues)
+- **Documentation**: See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed guide
+- **Kubernetes Docs**: [kubernetes.io](https://kubernetes.io/docs/)
 
 ### v1.0.0 (2025-10-23)
 - Initial release
