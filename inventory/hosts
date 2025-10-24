@@ -1,0 +1,16 @@
+[k8s_master]
+k8s-master ansible_host=192.168.1.60 ansible_user=ubuntu
+
+[k8s_workers]
+k8s-worker1 ansible_host=192.168.1.61 ansible_user=ubuntu
+k8s-worker2 ansible_host=192.168.1.62 ansible_user=ubuntu
+
+[kubernetes:children]
+k8s_master
+k8s_workers
+
+[kubernetes:vars]
+ansible_python_interpreter=/usr/bin/python3
+k8s_version=1.28.0
+kubeadm_token={{ kubeadm_token }}
+kubeadm_token_ca_cert_hash={{ kubeadm_token_ca_cert_hash }}

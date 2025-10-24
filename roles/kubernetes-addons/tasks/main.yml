@@ -1,0 +1,60 @@
+---
+- name: Install metrics-server
+  block:
+    - name: Download metrics-server manifest
+      get_url:
+        url: https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+        dest: /tmp/metrics-server.yaml
+      tags: addons, metrics-server
+
+    - name: Deploy metrics-server
+      command: kubectl apply -f /tmp/metrics-server.yaml
+      environment:
+        KUBECONFIG: /home/{{ ansible_user }}/.kube/config
+      tags: addons, metrics-server
+
+    - name: Wait for metrics-server to be ready
+      shell: |
+        kubectl wait --for=condition=ready pod -l k8s-app=metrics-server -n kube-system --timeout=300s
+      environment:
+        KUBECONFIG: /home/{{ ansible_user }}/.kube/config
+      tags: addons, metrics-server
+  when: metrics_server_enabled
+  run_once: true
+  tags: addons, metrics-server
+
+- name: Install Kubernetes Dashboard
+  block:
+    - name: Download dashboard manifest
+      get_url:
+        url: https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+        dest: /tmp/kubernetes-dashboard.yaml
+      tags: addons, dashboard
+
+    - name: Deploy Kubernetes Dashboard
+      command: kubectl apply -f /tmp/kubernetes-dashboard.yaml
+      environment:
+        KUBECONFIG: /home/{{ ansible_user }}/.kube/config
+      tags: addons, dashboard
+
+    - name: Wait for dashboard to be ready
+      shell: |
+        kubectl wait --for=condition=ready pod -l k8s-app=kubernetes-dashboard -n kubernetes-dashboard --timeout=300s
+      environment:
+        KUBECONFIG: /home/{{ ansible_user }}/.kube/config
+      tags: addons, dashboard
+
+    - name: Create dashboard admin user
+      template:
+        src: dashboard-admin.yaml.j2
+        dest: /tmp/dashboard-admin.yaml
+      tags: addons, dashboard
+
+    - name: Apply dashboard admin user
+      command: kubectl apply -f /tmp/dashboard-admin.yaml
+      environment:
+        KUBECONFIG: /home/{{ ansible_user }}/.kube/config
+      tags: addons, dashboard
+  when: dashboard_enabled
+  run_once: true
+  tags: addons, dashboard

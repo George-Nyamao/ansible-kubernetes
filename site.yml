@@ -1,0 +1,101 @@
+---
+- name: "Kubernetes Cluster Setup - Prerequisites"
+  hosts: kubernetes
+  become: yes
+  
+  pre_tasks:
+    - name: Display deployment information
+      debug:
+        msg:
+          - "=========================================="
+          - "Kubernetes Cluster Setup Starting"
+          - "=========================================="
+          - "Target: {{ inventory_hostname }}"
+          - "IP: {{ ansible_default_ipv4.address }}"
+          - "=========================================="
+      tags: always
+
+  roles:
+    - role: kubernetes-prereq
+      tags: prereq
+
+- name: "Kubernetes Master Configuration"
+  hosts: k8s_master
+  become: yes
+  
+  roles:
+    - role: kubernetes-master
+      tags: master
+
+  post_tasks:
+    - name: Display master setup information
+      debug:
+        msg:
+          - "=========================================="
+          - "✅ Kubernetes Master Configured!"
+          - "=========================================="
+          - "Master Node: {{ ansible_default_ipv4.address }}"
+          - ""
+          - "Next: Run worker node configuration"
+          - "=========================================="
+      tags: always
+
+- name: "Kubernetes Worker Configuration"
+  hosts: k8s_workers
+  become: yes
+  serial: 1
+  
+  pre_tasks:
+    - name: Wait for join command to be available
+      wait_for:
+        path: /tmp/kubeadm_join.sh
+        timeout: 300
+      delegate_to: "{{ groups['k8s_master'][0] }}"
+      run_once: true
+      tags: workers
+
+  roles:
+    - role: kubernetes-worker
+      tags: workers
+
+  post_tasks:
+    - name: Display worker setup information
+      debug:
+        msg:
+          - "=========================================="
+          - "✅ Worker Node {{ inventory_hostname }} Joined!"
+          - "=========================================="
+      tags: always
+
+- name: "Kubernetes Add-ons Installation"
+  hosts: k8s_master
+  
+  roles:
+    - role: kubernetes-addons
+      tags: addons
+
+  post_tasks:
+    - name: Display cluster status
+      shell: kubectl get nodes
+      environment:
+        KUBECONFIG: /home/{{ ansible_user }}/.kube/config
+      register: cluster_status
+      changed_when: false
+      tags: always
+
+    - name: Display cluster information
+      debug:
+        msg:
+          - "=========================================="
+          - "✅ Kubernetes Cluster Ready!"
+          - "=========================================="
+          - "{{ cluster_status.stdout }}"
+          - ""
+          - "To access the cluster:"
+          - "export KUBECONFIG=$(pwd)/kubeconfig"
+          - ""
+          - "Dashboard Access:"
+          - "kubectl proxy"
+          - "http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/"
+          - "=========================================="
+      tags: always

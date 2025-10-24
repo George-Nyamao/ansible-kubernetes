@@ -1,0 +1,4 @@
+---
+k8s_version: "1.28.0"
+container_runtime: "containerd"
+containerd_version: "1.7.0"

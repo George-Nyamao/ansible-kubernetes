@@ -1,0 +1,24 @@
+# Kubernetes
+kubeconfig
+kubeadm_join.sh
+.kube/
+
+# Ansible
+*.retry
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary
+*.tmp

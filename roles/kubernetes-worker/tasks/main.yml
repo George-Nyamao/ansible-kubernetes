@@ -1,0 +1,22 @@
+---
+- name: Wait for join command to be available
+  wait_for:
+    path: /tmp/kubeadm_join.sh
+    timeout: 300
+  tags: kubernetes, worker
+
+- name: Join worker to cluster
+  shell: /tmp/kubeadm_join.sh
+  register: kubeadm_join
+  changed_when: '"kubeadm join" in kubeadm_join.stdout'
+  tags: kubernetes, worker
+
+- name: Verify worker node joined
+  shell: |
+    sleep 10
+    kubectl get nodes
+  environment:
+    KUBECONFIG: /home/{{ ansible_user_master | default('ubuntu') }}/.kube/config
+  register: worker_joined
+  changed_when: false
+  tags: kubernetes, worker

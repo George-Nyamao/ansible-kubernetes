@@ -1,0 +1,30 @@
+---
+# Kubernetes configuration
+k8s_version: "1.28.0"
+k8s_cluster_name: "kubernetes"
+k8s_pod_network_cidr: "10.244.0.0/16"
+k8s_service_cidr: "10.96.0.0/12"
+
+# Container runtime
+container_runtime: "containerd"
+containerd_version: "1.7.0"
+
+# Network plugin
+network_plugin: "flannel"
+
+# API server settings
+api_server_port: 6443
+api_server_advertise_address: "{{ ansible_default_ipv4.address }}"
+
+# Application settings
+app_namespace: "default"
+metrics_server_enabled: true
+dashboard_enabled: true
+
+# Backup settings
+backup_dir: "/var/backups/kubernetes"
+backup_retention_days: 7
+
+# Security
+etcd_snapshot_enabled: true
+rbac_enabled: true

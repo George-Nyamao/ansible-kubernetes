@@ -1,0 +1,165 @@
+---
+- name: Disable swap
+  shell: |
+    swapoff -a
+    sed -i '/ swap / s/^/#/' /etc/fstab
+  tags: kubernetes, prereq
+
+- name: Update system packages
+  apt:
+    update_cache: yes
+    upgrade: safe
+  tags: kubernetes, prereq
+
+- name: Install prerequisites
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+      - software-properties-common
+      - net-tools
+      - vim
+      - wget
+      - htop
+      - git
+    state: present
+  tags: kubernetes, prereq
+
+- name: Load required kernel modules
+  modprobe:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - overlay
+    - br_netfilter
+  tags: kubernetes, prereq
+
+- name: Configure kernel parameters
+  sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    sysctl_set: yes
+    state: present
+    reload: yes
+  loop:
+    - { name: 'net.bridge.bridge-nf-call-iptables', value: '1' }
+    - { name: 'net.bridge.bridge-nf-call-ip6tables', value: '1' }
+    - { name: 'net.ipv4.ip_forward', value: '1' }
+  tags: kubernetes, prereq
+
+- name: Add Kubernetes repository key
+  apt_key:
+    url: https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key
+    keyring: /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+    state: present
+  tags: kubernetes, prereq
+
+- name: Add Kubernetes repository
+  apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /"
+    state: present
+    filename: kubernetes
+  tags: kubernetes, prereq
+
+- name: Update apt cache after adding repos
+  apt:
+    update_cache: yes
+  tags: kubernetes, prereq
+
+- name: Install kubeadm, kubelet, kubectl
+  apt:
+    name:
+      - kubeadm
+      - kubelet
+      - kubectl
+    state: present
+  tags: kubernetes, prereq
+
+- name: Add containerd repository key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+  tags: kubernetes, prereq, containerd
+
+- name: Add containerd repository
+  apt_repository:
+    repo: "deb https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    state: present
+    filename: docker
+  tags: kubernetes, prereq, containerd
+
+- name: Install containerd
+  apt:
+    name:
+      - containerd.io
+    state: present
+    update_cache: yes
+  tags: kubernetes, prereq, containerd
+
+- name: Create containerd config directory
+  file:
+    path: /etc/containerd
+    state: directory
+    mode: '0755'
+  tags: kubernetes, prereq, containerd
+
+- name: Generate containerd config
+  command: containerd config default > /etc/containerd/config.toml
+  tags: kubernetes, prereq, containerd
+
+- name: Configure containerd to use systemd cgroup
+  lineinfile:
+    path: /etc/containerd/config.toml
+    regexp: 'SystemdCgroup = false'
+    line: '            SystemdCgroup = true'
+  notify: restart containerd
+  tags: kubernetes, prereq, containerd
+
+- name: Start and enable containerd
+  systemd:
+    name: containerd
+    state: started
+    enabled: yes
+  tags: kubernetes, prereq, containerd
+
+- name: Start and enable kubelet
+  systemd:
+    name: kubelet
+    state: started
+    enabled: yes
+  tags: kubernetes, prereq
+
+- name: Configure firewall
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: tcp
+  loop:
+    - "6443"
+    - "2379"
+    - "2380"
+    - "10250"
+    - "10251"
+    - "10252"
+  tags: kubernetes, prereq, firewall
+
+- name: Enable UFW
+  ufw:
+    state: enabled
+    default: deny
+    direction: incoming
+  tags: kubernetes, prereq, firewall
+
+- name: Verify kubeadm version
+  command: kubeadm version
+  register: kubeadm_version_output
+  changed_when: false
+  tags: kubernetes, prereq
+
+- name: Display kubeadm version
+  debug:
+    var: kubeadm_version_output.stdout
+  tags: kubernetes, prereq
