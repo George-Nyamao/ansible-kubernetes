@@ -2,15 +2,6 @@
 
 Complete Kubernetes cluster automation using Ansible - from installation to production-ready setup.
 
-## Features
-
-## 🔗 Connect With Me
-
-[![GitHub](https://img.shields.io/badge/GitHub-George--Nyamao-181717?style=for-the-badge&logo=github)](https://github.com/George-Nyamao)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-George_Nyamao-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/george-nyamao-842137218/)
-[![Email](https://img.shields.io/badge/Email-gmnyamao@hotmail.com-D14836?style=for-the-badge&logo=gmail)](mailto:gmnyamao@hotmail.com)
-
-
 - ✅ Automated Kubernetes cluster initialization
 - ✅ Master and worker node configuration
 - ✅ Container runtime (containerd) setup
@@ -21,10 +12,17 @@ Complete Kubernetes cluster automation using Ansible - from installation to prod
 - ✅ RBAC configuration
 - ✅ Production-ready security settings
 
+## 🔗 Connect With Me
+
+[![GitHub](https://img.shields.io/badge/GitHub-George--Nyamao-181717?style=for-the-badge&logo=github)](https://github.com/George-Nyamao)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-George_Nyamao-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/george-nyamao-842137218/)
+[![Email](https://img.shields.io/badge/Email-gmnyamao@hotmail.com-D14836?style=for-the-badge&logo=gmail)](mailto:gmnyamao@hotmail.com)
+
+
+
 ## Project Structure
 
 
-## 🔗 Connect With Me
 
 [![GitHub](https://img.shields.io/badge/GitHub-George--Nyamao-181717?style=for-the-badge&logo=github)](https://github.com/George-Nyamao)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-George_Nyamao-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/george-nyamao-842137218/)
@@ -412,11 +410,6 @@ Contributions welcome! Please:
 MIT License
 
 ## Support
-[![GitHub Issues](https://img.shields.io/github/issues/George-Nyamao/ansible-kubernetes)](https://github.com/George-Nyamao/ansible-kubernetes/issues)
-[![GitHub Discussions](https://img.shields.io/badge/GitHub-Discussions-181717?style=flat&logo=github)](https://github.com/George-Nyamao/ansible-kubernetes/discussions)
-
-[![GitHub Issues](https://img.shields.io/github/issues/George-Nyamao/ansible-kubernetes)](https://github.com/George-Nyamao/ansible-kubernetes/issues)
-
 - **Issues**: [GitHub Issues](https://github.com/George-Nyamao/ansible-kubernetes/issues)
 - **Kubernetes Docs**: [kubernetes.io](https://kubernetes.io/docs/)
 
